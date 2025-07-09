@@ -1,7 +1,7 @@
 # 1. configuracion basica
-set $mod mod4
+set $mod Mod4
 default_border none
-font pango:ubuntumono nerd font 10
+font pango:UbuntuMono Nerd Font 10
 
 # 2. diseno y espaciado
 gaps inner 5
@@ -17,41 +17,48 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
-exec_always --no-startup-id "$home/.config/polybar/launch.sh"
+exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 exec_always --no-startup-id ~/.local/bin/init-background.sh
 exec --no-startup-id flameshot &
 
 # 5. configuracion de teclas
-bindsym $mod+shift+left focus left
-bindsym $mod+shift+down focus down
-bindsym $mod+shift+up focus up
-bindsym $mod+shift+right focus right
+bindsym $mod+Shift+Left focus left
+bindsym $mod+Shift+Down focus down
+bindsym $mod+Shift+Up focus up
+bindsym $mod+Shift+Right focus right
 
 # 6. atajos personalizados
 bindsym $mod+t exec alacritty
 bindsym $mod+d exec rofi -show drun -modi drun -display-drun "search" -theme ~/.config/rofi/launcher.rasi
 bindsym $mod+e exec --no-startup-id thunar
-bindsym $mod+shift+b exec --no-startup-id ~/.local/bin/change-background.sh
+bindsym $mod+Shift+b exec --no-startup-id ~/.local/bin/change-background.sh
+
 bindsym $mod+q kill
-bindsym $mod+shift+f floating toggle, fullscreen disable
+bindsym $mod+Shift+f floating toggle, fullscreen disable
 bindsym $mod+space focus mode_toggle
-bindsym $mod+shift+space floating toggle
-bindsym $mod+left move left
-bindsym $mod+down move down
-bindsym $mod+up move up
-bindsym $mod+right move right
-bindsym xf86audioraisevolume exec --no-startup-id "pamixer -i 5 && ~/.local/bin/system-notify volume"
-bindsym xf86audiolowervolume exec --no-startup-id "pamixer -d 5 && ~/.local/bin/system-notify volume"
-bindsym xf86audiomute exec --no-startup-id "pamixer -t && ~/.local/bin/system-notify volume"
-bindsym xf86audiomicmute exec --no-startup-id "pamixer --default-source -t && ~/.local/bin/system-notify volume"
-bindsym xf86monbrightnessdown exec --no-startup-id "brightnessctl set 5%- && ~/.local/bin/system-notify brightness"
-bindsym xf86monbrightnessup exec --no-startup-id "brightnessctl set +5% && ~/.local/bin/system-notify brightness"
-bindsym xf86poweroff exec --no-startup-id wlogout
-bindsym f8 exec --no-startup-id "if nmcli radio wifi | grep -q 'enabled'; then nmcli radio wifi off; else nmcli radio wifi on; fi"
-bindsym f10 exec --no-startup-id "dm-tool switch-to-greeter"
-bindcode 107 exec --no-startup-id flameshot screen -n 0 -p ~/images/screenshots
-bindcode $mod+shift+39 exec --no-startup-id flameshot gui -p ~/images/screenshots
-bindsym $mod+return exec --no-startup-id alacritty --class fastfetch -e ~/.local/bin/fastfetch-launcher.sh
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+Left move left
+bindsym $mod+Down move down
+bindsym $mod+Up move up
+bindsym $mod+Right move right
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pamixer -i 5 && ~/.local/bin/system-notify volume"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pamixer -d 5 && ~/.local/bin/system-notify volume"
+bindsym XF86AudioMute exec --no-startup-id "pamixer -t && ~/.local/bin/system-notify volume"
+bindsym XF86AudioMicMute exec --no-startup-id "pamixer --default-source -t && ~/.local/bin/system-notify volume"
+
+bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 5%- && ~/.local/bin/system-notify brightness"
+bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +5% && ~/.local/bin/system-notify brightness"
+
+bindsym XF86PowerOff exec --no-startup-id wlogout
+bindsym F8 exec --no-startup-id "if nmcli radio wifi | grep -q 'enabled'; then nmcli radio wifi off; else nmcli radio wifi on; fi"
+bindsym F10 exec --no-startup-id "dm-tool switch-to-greeter"
+
+bindcode 107 exec --no-startup-id flameshot screen -n 0 -p ~/Images/Screenshots
+bindcode $mod+Shift+39 exec --no-startup-id flameshot gui -p ~/Images/Screenshots
+
+bindsym $mod+Return exec --no-startup-id alacritty --class Fastfetch -e ~/.local/bin/fastfetch-launcher.sh
 
 # 7. workspaces
 set $ws1 "1"
@@ -65,6 +72,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# navegacion entre workspaces
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -76,16 +84,17 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
-bindsym $mod+shift+1 move container to workspace number $ws1
-bindsym $mod+shift+2 move container to workspace number $ws2
-bindsym $mod+shift+3 move container to workspace number $ws3
-bindsym $mod+shift+4 move container to workspace number $ws4
-bindsym $mod+shift+5 move container to workspace number $ws5
-bindsym $mod+shift+6 move container to workspace number $ws6
-bindsym $mod+shift+7 move container to workspace number $ws7
-bindsym $mod+shift+8 move container to workspace number $ws8
-bindsym $mod+shift+9 move container to workspace number $ws9
-bindsym $mod+shift+0 move container to workspace number $ws10
+# mover ventanas entre workspaces
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # 8. modos especiales
 mode "resize" {
@@ -93,15 +102,16 @@ mode "resize" {
     bindsym $down resize grow height 10 px or 10 ppt
     bindsym $up resize shrink height 10 px or 10 ppt
     bindsym $right resize grow width 10 px or 10 ppt
-    bindsym return mode "default"
-    bindsym escape mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
 # 9. gestion del sistema
-bindsym $mod+shift+c reload
-bindsym $mod+shift+r restart
-bindsym $mod+shift+e exec "i3-nagbar -t warning -m 'exit i3?' -b 'yes' 'i3-msg exit'"
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
 
 # 10. comportamiento avanzado
 floating_modifier $mod
