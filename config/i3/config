@@ -17,7 +17,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
-exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
+exec_always --no-startup-id "$HOME/.local/bin/polybar-launcher.sh"
 exec_always --no-startup-id ~/.local/bin/init-background.sh
 exec --no-startup-id flameshot &
 

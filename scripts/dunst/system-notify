@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# configuracion general
+NOTIFY_ID=5555
+DEFAULT_TIMEOUT=1500
+
+# variables necesarias para dunst
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+
+case "$1" in
+    brightness)
+        # notificacion de brillo
+        BRIGHTNESS=$(brightnessctl get)
+        MAX_BRIGHTNESS=$(brightnessctl max)
+        PERCENT=$((BRIGHTNESS * 100 / MAX_BRIGHTNESS))
+
+        if [ "$PERCENT" -lt 30 ]; then
+            ICON="󰃞"
+        elif [ "$PERCENT" -lt 70 ]; then
+            ICON="󰃟"
+        else
+            ICON="󰃠"
+        fi
+
+        /usr/bin/notify-send -r "$NOTIFY_ID" -h "int:value:$PERCENT" \
+            -t "$DEFAULT_TIMEOUT" -u normal "$ICON  Brightness" "Screen: $PERCENT%"
+        ;;
+
+    volume)
+        # notificacion de volumen y microfono
+        VOLUME=$(pamixer --get-volume)
+        IS_MUTED=$(pamixer --get-mute)
+        MIC_MUTED=$(pamixer --default-source --get-mute)
+
+        if [ "$IS_MUTED" = "true" ]; then
+            ICON_VOL=""
+            TEXT_VOL="Speaker: Muted"
+        else
+            if [ "$VOLUME" -lt 30 ]; then
+                ICON_VOL=""
+            elif [ "$VOLUME" -lt 70 ]; then
+                ICON_VOL=""
+            else
+                ICON_VOL=""
+            fi
+            TEXT_VOL="Speaker: $VOLUME%"
+        fi
+
+        if [ "$MIC_MUTED" = "true" ]; then
+            ICON_MIC=""
+            TEXT_MIC="Mic: OFF"
+        else
+            ICON_MIC=""
+            TEXT_MIC="Mic: ON"
+        fi
+
+        /usr/bin/notify-send -r "$NOTIFY_ID" -h "int:value:$VOLUME" \
+            -t "$DEFAULT_TIMEOUT" -u normal "$ICON_VOL  Volume" "$TEXT_VOL\n$TEXT_MIC $ICON_MIC"
+        ;;
+
+    *)
+        # uso incorrecto
+        echo "Usage: $0 {brightness|volume}"
+        exit 1
+        ;;
+esac
+
+exit 0
+
