@@ -1,0 +1,79 @@
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    drun-display-format: "{icon} {name}";
+    font: "UbuntuMono Nerd Font 12";
+}
+
+* {
+    background-color: #1E1E2E;
+    text-color: #CDD6F4;
+    border-radius: 12px;
+    padding: 12px;
+    spacing: 6px;
+}
+
+window {
+    background-color: #1E1E2E;
+    width: 20%;
+    border: 2px;
+    border-color: #89B4FA;
+    children: [inputbar, listview];
+    location: northwest;
+    y-offset: 27px;
+}
+
+inputbar {
+    background-color: #1E1E2E;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 0px;
+    children: [prompt, entry];
+}
+
+prompt {
+    text-color: #CDD6F4;
+    background-color: transparent;
+}
+
+entry {
+    text-color: #CDD6F4;
+    placeholder-color: #6C7086;
+    background-color: #313244;
+}
+
+listview {
+    lines: 6;
+    layout: vertical;
+    spacing: 10px;
+    dynamic: true;
+    fixed-height: false;
+    fixed-lines: false;
+    scrollbar: false;
+}
+
+element {
+    background-color: transparent;
+    text-color: #CDD6F4;
+    padding: 6px 10px;
+    border-radius: 8px;
+    spacing: 10px;
+    horizontal-align: 0.0;
+}
+
+element selected {
+    background-color: #45475A;
+    text-color: #1E1E2E;
+}
+
+element-icon {
+    size: 20px;
+    background-color: inherit;
+    padding: 0px;
+    margin: 0px;
+}
+
+element-text {
+    background-color: inherit;
+}
+
