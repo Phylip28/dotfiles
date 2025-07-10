@@ -2,7 +2,7 @@
 
 Este repositorio contiene los archivos de configuración personalizados de mi sistema Arch Linux, instalado completamente desde cero, sin usar archinstall, asistentes de instalación o cualquier script de automatización.
 
-
+![Vista previa](preview/feh.gif)
 
 ## Proposito y Tecnologias
 
