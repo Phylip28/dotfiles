@@ -27,6 +27,10 @@ bindsym $mod+Shift+Down focus down
 bindsym $mod+Shift+Up focus up
 bindsym $mod+Shift+Right focus right
 
+# division de ventanas
+bindsym $mod+v exec --no-startup-id "i3-msg split v && alacritty"
+bindsym $mod+h exec --no-startup-id "i3-msg split h && alacritty"
+
 # 6. atajos personalizados
 bindsym $mod+t exec alacritty
 bindsym $mod+d exec rofi -show drun -modi drun -display-drun "search" -theme ~/.config/rofi/launcher.rasi
