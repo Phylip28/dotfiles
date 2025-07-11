@@ -18,6 +18,12 @@ Los dotfiles estan diseñados para crear un etorno minimalista, que sea eficient
 - `Flameshot` para capturas de pantalla
 - `Feh` Para el fondo de escritorio
 
+## Instalación
+
+1. Clona o descarga el contenido del repositorio
+2. Mueve el contenido del directorio config a la ruta `~/.config`
+3. Mueve el contenido del directorio scripts a la ruta `~/.local/bin`
+
 ## Sugerencias
 
 Puedes clonar, hacer forks o sugerir mejoras para optimizar el sistema, estoy abierto a nuevas ideas.

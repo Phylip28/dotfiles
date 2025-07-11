@@ -1,0 +1,54 @@
+configuration {
+    show-icons: false;
+    font: "UbuntuMono Nerd Font 12";
+    disable-history: true;
+    hide-scrollbar: true;
+    no-fixed-num-lines: true;
+    prompt: "";
+}
+
+* {
+    background-color: #1E1E2E;
+    text-color: #CDD6F4;
+    border-radius: 12px;
+    padding: 8px;
+    spacing: 6px;
+}
+
+window {
+    background-color: #1E1E2E;
+    width: 15%;
+    location: south;
+    anchor: south;
+    y-offset: -40px;
+    border: 2px;
+    border-color: #89B4FA;
+    children: [listview];
+}
+
+listview {
+    lines: 2;
+    layout: vertical;
+    spacing: 10px;
+    dynamic: false;
+    scrollbar: false;
+}
+
+element {
+    background-color: transparent;
+    text-color: #CDD6F4;
+    padding: 8px 12px;
+    border-radius: 8px;
+    spacing: 10px;
+    horizontal-align: 0.5;
+}
+
+element selected {
+    background-color: #45475A;
+    text-color: #1E1E2E;
+}
+
+element-text {
+    background-color: inherit;
+}
+

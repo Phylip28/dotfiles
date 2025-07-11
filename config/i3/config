@@ -39,7 +39,7 @@ bindsym $mod+Shift+b exec --no-startup-id ~/.local/bin/change-background.sh
 
 bindsym $mod+q kill
 bindsym $mod+Shift+f floating toggle, fullscreen disable
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space exec --no-startup-id ~/.local/bin/language-selector.sh
 bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+Left move left
