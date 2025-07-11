@@ -21,12 +21,23 @@ Los dotfiles estan diseñados para crear un etorno minimalista, que sea eficient
 ## Instalación
 
 1. Clona o descarga el contenido del repositorio
-2. Mueve el contenido del directorio config a la ruta `~/.config`
-3. Mueve el contenido del directorio scripts a la ruta `~/.local/bin`
+2. Copia el contenido del directorio config a tu carpeta de configuracion local:
+    ```bash
+    cp -r config/* ~/.config/
+    ```
+3. Copia los scripts al directorio `~/.local/bin`:
+    ```bash
+    cp -r scripts/* ~/.local/bin/
+    ```
+4. Ejecuta el siguiente comando:
+
+    ```bash
+    find ~/.local/bin/ -type f -name "*.sh" -exec chmod +x {} \;
+    ```
 
 ## Sugerencias
 
-Puedes clonar, hacer forks o sugerir mejoras para optimizar el sistema, estoy abierto a nuevas ideas.
+Puedes hacer forks o sugerir mejoras para optimizar el sistema, estoy abierto a nuevas ideas o modificaciones.
 
 ## Importante
 
