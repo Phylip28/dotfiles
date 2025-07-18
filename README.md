@@ -20,25 +20,30 @@ Los dotfiles estan diseñados para crear un etorno minimalista, que sea eficient
 
 ## Instalación
 
-1. Clona o descarga el contenido del repositorio
-2. Copia el contenido del directorio config a tu carpeta de configuracion local:
+1. Clona o descarga el contenido del repositorio:
     ```bash
-    cp -r config/* ~/.config/
+    git clone https://github.com/Phylip28/dotfiles.git
     ```
-3. Copia los scripts al directorio `~/.local/bin`:
+    o con SSH
     ```bash
-    cp -r scripts/* ~/.local/bin/
+    git clone git@github.com:Phylip28/dotfiles.git
     ```
-4. Ejecuta el siguiente comando:
+2. Entra al directorio:
+    ```bash
+    cd dotfiles
+    ```
+3. Da permisos de ejecución al script de instalación:
+    ```bash
+    chmod +x setup-dotfiles.sh
+    ```
+4. Ejecuta el script:
 
     ```bash
-    find ~/.local/bin/ -type f -name "*.sh" -exec chmod +x {} \;
+    ./setup-dotfiles.sh
     ```
+
+>**Nota:** El script te preguntará si deseas hacer un respaldo de tus configuraciones actuales. No necesitas hacerlo manualmente. 
 
 ## Sugerencias
 
 Puedes hacer forks o sugerir mejoras para optimizar el sistema, estoy abierto a nuevas ideas o modificaciones.
-
-## Importante
-
-Por el momento puedes clonar y mover las carpetas a sus repectivos lugares, pero dentro de poco creare un script para automatizar el proceso.
