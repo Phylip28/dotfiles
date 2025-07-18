@@ -9,7 +9,7 @@ BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%s)"
 echo "Instalando dotfiles..."
 
 # Validar de ruta
-if [[ ! -d config || ! -d scripts ]]; then
+if [[ ! -d "$REPO_DIR/config" || ! -d "$REPO_DIR/scripts" ]]; then
     echo "Por favor ejecuta el script desde la raiz del repositorio"
     exit 1
 fi
@@ -36,11 +36,12 @@ mkdir -p "$BIN_DIR"
 
 # Copiar archivos de configuracion
 echo "Copiando configuraciones..."
-cp -r "$REPO_DIR/config/" "$CONFIG_DIR"
+cp -r "$REPO_DIR/config/." "$CONFIG_DIR"
 
 # Copiar scripts
 echo "Copiando scripts..."
-cp -r "$REPO_DIR/scripts"
+cp -r "$REPO_DIR/scripts/." "$BIN_DIR"
+chmod +x "$BIN_DIR"/* # Otorgar permisos de ejecucion
 
 # Salida
 echo "Dotfiles instalados correctamente ✅"
