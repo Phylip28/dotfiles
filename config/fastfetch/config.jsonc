@@ -22,9 +22,9 @@
     { "type": "wm",       "key": " 󰧨 " },
     { "type": "shell",    "key": " 󰄷 " },
     { "type": "terminal", "key": " 󰆍 " },
-    { "type": "uptime",   "key": " 󱎫 " },
+    { "type": "swap",     "key": " 󰍛 " },
     { "type": "memory",   "key": "  " },
-    { "type": "cpu",      "key": " 󰍛 " },
+    { "type": "cpu",      "key": "  " },
     { "type": "packages", "key": " 󰏖 " },
     { "type": "disk",     "key": " 󰋊 " },
     {
