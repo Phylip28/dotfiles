@@ -1,0 +1,53 @@
+# Base
+base
+linux
+linux-firmware
+amd-ucode
+
+# Boot y red
+grub
+efibootmgr
+networkmanager
+
+# Terminal y utilidades
+alacritty
+fastfetch
+btop
+nano
+vim
+sudo
+yay
+
+# Entorno gráfico mínimo
+xorg
+xorg-xinit
+i3
+dunst
+polybar
+rofi
+picom
+feh
+thunar
+lxappearance
+qt5ct
+
+# Audio y bluetooth
+pulseaudio
+pavucontrol
+bluez
+bluez-utils
+blueman
+
+# Oficina y extras
+libreoffice-fresh
+firefox
+
+# Extras útiles
+git
+neofetch
+htop
+unzip
+zip
+wget
+curl
+
