@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Validacion de ejecucion (no ejecutar como sudo)
-if [[ "$EUID" -eq 0]]; then
+if [[ "$EUID" -eq 0 ]]; then
     echo -e "No ejecutes este script como root ni con sudo."
     echo "Hazlo desde tu usuario normal para que los archivos se copien a tu home correctamente."
     exit 1
