@@ -3,186 +3,186 @@
 # Variables
 DISK="/dev/sda"
 HOSTNAME="arch"
-read -p "Ingresa el nombre del nuevo usuario: " USERNAME
+read -p "Enter the new username: " USERNAME
 
-# Validación de contraseña (maximo 3 intentos)
+# Password validation (maximum 3 attempts)
 MAX_ATTEMPTS=3
 attempt=1
 
 while [ $attempt -le $MAX_ATTEMPTS ]; do
-    read -s -p "Ingresa la contraseña para $USERNAME: " PASSWORD
+    read -s -p "Enter password for $USERNAME: " PASSWORD
     echo
-    read -s -p "Confirma la contraseña: " PASSWORD_CONFIRM
+    read -s -p "Confirm password: " PASSWORD_CONFIRM
     echo
 
-    # Validar si las contraseñas coinciden
+    # Validate if passwords match
     if [[ "$PASSWORD" == "$PASSWORD_CONFIRM" ]]; then
-        echo "Contraseña confirmada correctamente."
+        echo "Password confirmed correctly."
         break
     else
-        echo "Las contraseñas no coinciden. Intento $attempt de $MAX_ATTEMPTS."
+        echo "Passwords don't match. Attempt $attempt of $MAX_ATTEMPTS."
         ((attempt++))
     fi
 done
 
-# Si falla 3 veces, salir del script
+# If it fails 3 times, exit script
 if [ $attempt -gt $MAX_ATTEMPTS ]; then
-    echo "Se excedieron los intentos permitidos. Abortando instalación..."
+    echo "Maximum attempts exceeded. Aborting installation..."
     exit 1
 fi
 
-# Modo de arranque
+# Boot mode
 while true; do
-    read -p "¿Estás usando UEFI o BIOS? (uefi/bios): " BOOT_MODE
+    read -p "Are you using UEFI or BIOS? (uefi/bios): " BOOT_MODE
     
-    # Validar la entrada    
+    # Validate input    
     if [[ "$BOOT_MODE" == "uefi" || "$BOOT_MODE" == "bios" ]]; then
-        echo "Modo seleccionado: $BOOT_MODE"
+        echo "Selected mode: $BOOT_MODE"
         break
     else
-        echo "Opción inválida. Escribe 'uefi' o 'bios'."
+        echo "Invalid option. Type 'uefi' or 'bios'."
     fi
 done
 
-# Mostrar las particiones disponibles 
-echo "Discos y particiones disponibles"
+# Show available partitions 
+echo "Available disks and partitions"
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 
-# Pedir la partición raíz 
+# Ask for root partition 
 while true; do
-    read -p "Ingresa la partición donde vas a instalar Arch (ej. sda3, nvme0n1p2): " PARTITION
+    read -p "Enter the partition where you'll install Arch (e.g. sda3, nvme0n1p2): " PARTITION
     
-    # Verificar si realmente existe la partición
+    # Verify if partition really exists
     if [ -b "/dev/$PARTITION" ]; then
         ROOT_PARTITION="/dev/$PARTITION"
-        echo "Partición seleccionada: $ROOT_PARTITION"
+        echo "Selected partition: $ROOT_PARTITION"
         break
     else
-        echo "Partición inválida. Intenta de nuevo."
+        echo "Invalid partition. Try again."
     fi
 done
 
-# Pedir la partición EFI solo si el sistema usa UEFI
+# Ask for EFI partition only if system uses UEFI
 if [[ "$BOOT_MODE" == "uefi" ]]; then
-    echo "Discos disponibles:"
+    echo "Available disks:"
     lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
     
-    # Preguntar si existe una partición previa para evitar duplicados y problemas
+    # Ask if an existing partition exists to avoid duplicates and problems
     while true; do
-        read -p "¿Deseas reutilizar una partición EFI existente? (si/no): " USE_EXISTING_EFI
+        read -p "Do you want to reuse an existing EFI partition? (yes/no): " USE_EXISTING_EFI
         case "$USE_EXISTING_EFI" in
-            si)
-                # Solicitar la partición existente
+            yes)
+                # Request existing partition
                 while true; do
-                    read -p "Ingresa la partición EFI existente (ej. sda1, nvme0n1p1): " EFI_PART
+                    read -p "Enter the existing EFI partition (e.g. sda1, nvme0n1p1): " EFI_PART
                     
-                    # Validar que exista la partición
+                    # Validate partition exists
                     if [ -b "/dev/$EFI_PART" ]; then
                         EFI_PARTITION="/dev/$EFI_PART"
-                        echo "Usando partición EFI existente: $EFI_PARTITION"
+                        echo "Using existing EFI partition: $EFI_PARTITION"
                         break
                     else
-                        echo "Partición inválida. Intenta de nuevo."
+                        echo "Invalid partition. Try again."
                     fi
                 done
                 break
                 ;;
             no)
-                # Solicitar la nueva partición
+                # Request new partition
                 while true; do
-                    read -p "Ingresa la partición EFI (ej. sda1, nvme0n1p1): " EFI_PART
+                    read -p "Enter the EFI partition (e.g. sda1, nvme0n1p1): " EFI_PART
                     
-                    # Validar que exista la partición
+                    # Validate partition exists
                     if [ -b "/dev/$EFI_PART" ]; then
                         EFI_PARTITION="/dev/$EFI_PART"
-                        echo "Partición EFI seleccionada: $EFI_PARTITION"
+                        echo "Selected EFI partition: $EFI_PARTITION"
                         break
                     else
-                        echo "Partición inválida. Intenta de nuevo."
+                        echo "Invalid partition. Try again."
                     fi
                 done
                 ;;
             *)
-                echo "Respuesta inválida. Escribe 'si' o 'no'."
+                echo "Invalid response. Type 'yes' or 'no'."
                 ;;
         esac
     done
 fi
 
-# Confirmar si desea formatear la partición raíz
-read -p "¿Deseas formatear la partición raíz $ROOT_PARTITION? (si/no): " FORMAT_ROOT
+# Confirm if you want to format root partition
+read -p "Do you want to format the root partition $ROOT_PARTITION? (yes/no): " FORMAT_ROOT
 
-if [[ "$FORMAT_ROOT" == "si" ]]; then
+if [[ "$FORMAT_ROOT" == "yes" ]]; then
     mkfs.ext4 "$ROOT_PARTITION"
-    echo "Partición raíz formateada."
+    echo "Root partition formatted."
 else
-    echo "No se formateará la raíz. Asegúrate de que esté vacía o correctamente configurada."
+    echo "Root won't be formatted. Make sure it's empty or properly configured."
 fi
 
-# Montar la partición raíz
+# Mount root partition
 mount "$ROOT_PARTITION" /mnt
 
-# Crear carpeta y montar EFI si es necesario
+# Create folder and mount EFI if necessary
 if [[ "$BOOT_MODE" == "uefi" ]]; then
     mkdir -p /mnt/boot/efi
     mount "$EFI_PARTITION" /mnt/boot/efi
 fi
 
-# Sistema base
-echo "Instalando paquetes base en el nuevo sistema..."
+# Base system
+echo "Installing base packages on the new system..."
 
-# Validar que el archivo de paquetes exista
+# Validate that packages file exists
 if [ ! -f "$(dirname "$0")/packages.txt" ]; then
-    echo "No se encontró packages.txt en el mismo directorio del script."
+    echo "packages.txt not found in the same directory as the script."
     exit 1
 fi
 
-# Ejecutar pacstrap con la lista de paquetes
+# Execute pacstrap with package list
 pacstrap -K /mnt $(< "$(dirname "$0")/packages.txt")
-echo "Paquetes instalados correctamente."
+echo "Packages installed correctly."
 
-echo "Generando archivo fstab..."
+echo "Generating fstab file..."
 genfstab -U /mnt >> /mnt/etc/fstab
-echo "fstab generado correctamente."
+echo "fstab generated correctly."
 
-# Guardamos las variables para pasarlas como variables de entorno
+# Save variables to pass as environment variables
 echo "export USERNAME=$USERNAME" >> /mnt/root/.chrootenv
 echo "export DISK=$DISK" >> /mnt/root/.chrootenv
 echo "export BOOT_MODE=$BOOT_MODE" >> /mnt/root/.chrootenv
 
-# Entrar al nuevo sistema
-echo "Entrando al sistema con arch-chroot..."
+# Enter new system
+echo "Entering system with arch-chroot..."
 cp "$0" /mnt/install.sh
 arch-chroot /mnt /bin/bash /install.sh --post-install
 
 if [[ "$1" == "--post-install" ]]; then
-    # Cargamos las variables de entorno
+    # Load environment variables
     source /root/.chrootenv
 
-    echo "Configurando el sistema dentro de chroot..."
+    echo "Configuring system inside chroot..."
 
     echo "$HOSTNAME" > /etc/hostname
 
     ln -sf /usr/share/zoneinfo/America/Bogota /etc/localtime
     hwclock --systohc
 
-    echo "Configurando locales..."
+    echo "Configuring locales..."
     sed -i 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
     sed -i 's/^#es_CO.UTF-8/es_CO.UTF-8/' /etc/locale.gen
     locale-gen
     echo "LANG=es_CO.UTF-8" > /etc/locale.conf
 
-    echo "Estableciendo contraseña para root..."
+    echo "Setting root password..."
     passwd
 
-    echo "Creando usuario $USERNAME..."
+    echo "Creating user $USERNAME..."
     useradd -m -G wheel -s /bin/bash "$USERNAME"
-    echo "Estableciendo contraseña para $USERNAME..."
+    echo "Setting password for $USERNAME..."
     passwd "$USERNAME"
 
     echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
-    echo "Instalando GRUB..."
+    echo "Installing GRUB..."
 
     if [[ "$BOOT_MODE" == "uefi" ]]; then
         grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
@@ -192,13 +192,13 @@ if [[ "$1" == "--post-install" ]]; then
 
     grub-mkconfig -o /boot/grub/grub.cfg
 
-    echo "Eliminando instalador temporal..."
+    echo "Removing temporary installer..."
     rm /install.sh
 
-    echo "Eliminando el archivo temporal (variables de entorno)"
+    echo "Removing temporary file (environment variables)"
     rm -f /root/.chrootenv
 
-    echo "¡Instalación básica completada! Puedes salir del chroot y reiniciar."
+    echo "Basic installation completed! You can exit chroot and reboot."
     exit 0
 fi
 

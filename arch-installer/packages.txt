@@ -4,12 +4,12 @@ linux
 linux-firmware
 amd-ucode
 
-# Boot y red
+# Boot and network
 grub
 efibootmgr
 networkmanager
 
-# Terminal y utilidades
+# Terminal and utilities
 alacritty
 fastfetch
 btop
@@ -18,7 +18,7 @@ vim
 sudo
 yay
 
-# Entorno gráfico mínimo
+# Minimal graphical environment
 xorg
 xorg-xinit
 i3
@@ -31,18 +31,18 @@ thunar
 lxappearance
 qt5ct
 
-# Audio y bluetooth
+# Audio and bluetooth
 pulseaudio
 pavucontrol
 bluez
 bluez-utils
 blueman
 
-# Oficina y extras
+# Office and extras
 libreoffice-fresh
 firefox
 
-# Extras útiles
+# Useful extras
 git
 neofetch
 htop

@@ -1,30 +1,46 @@
+# Alacritty Terminal Emulator Configuration
+# This file configures the appearance and behavior of the Alacritty terminal
+
+# Import external theme configuration (Catppuccin Macchiato color scheme)
 [general]
 import = [ "~/.themes/catppuccin/alacritty/catppuccin/catppuccin-macchiato.toml" ]
 
+# Base font size for all text in the terminal
 [font]
 size = 10.0
 
+# Font configuration for bold text
 [font.bold]
 family = "UbuntuMono Nerd Font"
 style = "Bold"
 
+# Font configuration for bold italic text
 [font.bold_italic]
 family = "UbuntuMono Nerd Font"
 style = "Bold Italic"
 
+# Font configuration for italic text
 [font.italic]
 family = "UbuntuMono Nerd Font"
 style = "Italic"
 
+# Font configuration for normal/regular text
 [font.normal]
 family = "UbuntuMono Nerd Font"
 style = "Regular"
 
+# Window appearance and behavior settings
 [window]
+# Start in windowed mode (not fullscreen or maximized)
 startup_mode = "Windowed"
+# Window transparency (0.0 = fully transparent, 1.0 = fully opaque)
 opacity = 0.9
+# Internal padding around the terminal content (horizontal spacing)
 padding = {x=2}
+# Initial window size in columns and lines
 dimensions = { columns = 80, lines = 20}
 
+# Color scheme overrides (additional to imported theme)
 [colors]
+# Primary background color override
 primary = { background = "#1E1E2E" }

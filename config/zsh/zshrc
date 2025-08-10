@@ -122,8 +122,8 @@ alias cll='clear;ls'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Sourcing ssh-agent variables for persistence across shells
-# Carga las variables de entorno del ssh-agent si existen.
-# El archivo es creado por .xsession al iniciar la sesión X.
+# Load ssh-agent environment variables if they exist.
+# The file is created by .xsession when starting the X session.
 if [ -f "$HOME/.ssh/agent-environment" ]; then
     . "$HOME/.ssh/agent-environment" > /dev/null
 fi

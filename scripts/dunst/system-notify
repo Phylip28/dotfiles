@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# configuracion general
+# general configuration
 NOTIFY_ID=5555
 DEFAULT_TIMEOUT=1500
 
-# variables necesarias para dunst
+# necessary variables for dunst
 export DISPLAY=:0
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 
 case "$1" in
     brightness)
-        # notificacion de brillo
+        # brightness notification
         BRIGHTNESS=$(brightnessctl get)
         MAX_BRIGHTNESS=$(brightnessctl max)
         PERCENT=$((BRIGHTNESS * 100 / MAX_BRIGHTNESS))
@@ -28,7 +28,7 @@ case "$1" in
         ;;
 
     volume)
-        # notificacion de volumen y microfono
+        # volume and microphone notification
         VOLUME=$(pamixer --get-volume)
         IS_MUTED=$(pamixer --get-mute)
         MIC_MUTED=$(pamixer --default-source --get-mute)
@@ -60,7 +60,7 @@ case "$1" in
         ;;
 
     *)
-        # uso incorrecto
+        # incorrect usage
         echo "Usage: $0 {brightness|volume}"
         exit 1
         ;;
