@@ -8,6 +8,8 @@ This repository contains the custom configuration files for my Arch Linux system
 
 The dotfiles are designed to create a minimalist environment that is efficient and visually appealing.
 
+**Technologies used:**
+
 - `i3` as window manager
 - `Alacritty` as terminal emulator
 - `Picom` to create effects and visual modifications
